@@ -36,13 +36,13 @@ jobs:
           name: coverage-report
           path: coverage.out
 
-      - name: Generate test summary
-        id: test-summary
-        run: |
-          if [ -f coverage.out ]; then
-            total_coverage=$(go tool cover -func=coverage.out | grep 'total:' | awk '{print $3}')
-            echo "Test passed successfully. Code coverage: $total_coverage"
-            echo "RESULT=Test passed. Coverage: $total_coverage" >> $GITHUB_ENV
-          else
-            echo "Test failed or no coverage file generated."
-            echo "RESULT=Test failed. No coverage file." >> $GITHUB_ENV
+      # - name: Generate test summary
+      #   id: test-summary
+      #   run: |
+      #     if [ -f coverage.out ]; then
+      #       total_coverage=$(go tool cover -func=coverage.out | grep 'total:' | awk '{print $3}')
+      #       echo "Test passed successfully. Code coverage: $total_coverage"
+      #       echo "RESULT=Test passed. Coverage: $total_coverage" >> $GITHUB_ENV
+      #     else
+      #       echo "Test failed or no coverage file generated."
+      #       echo "RESULT=Test failed. No coverage file." >> $GITHUB_ENV
