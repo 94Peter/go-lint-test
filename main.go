@@ -20,7 +20,6 @@ var (
 
 func main() {
 	flag.Parse()
-
 	if *v {
 		fmt.Println(Version)
 		fmt.Println("Build Time: " + BuildTime)
@@ -31,6 +30,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println(path)
 	envFile := path + "/.env"
 	if util.FileExists(envFile) {
 		err = godotenv.Load(envFile)
