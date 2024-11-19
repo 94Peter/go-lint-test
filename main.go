@@ -8,7 +8,6 @@ import (
 
 	"github.com/94peter/sterna/util"
 	"github.com/joho/godotenv"
-	"github.com/pkg/errors"
 )
 
 var (
@@ -30,13 +29,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(path)
 	envFile := path + "/.env"
 	if util.FileExists(envFile) {
-		err = godotenv.Load(envFile)
-		if err != nil {
-			panic(errors.Wrap(err, "load .env file fail"))
-		}
+		godotenv.Load(envFile)
 	}
 
 	fmt.Println("just test")

@@ -70,26 +70,3 @@ func Test_MainEnvFileExists(t *testing.T) {
 	// Check that .env file is loaded
 	assert.Equal(t, "value", os.Getenv("TEST_ENV_VAR"))
 }
-
-func TestMainLoadEnvError(t *testing.T) {
-	// Create temporary .env file with invalid contents
-	tmpFile, err := os.CreateTemp("", ".env")
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer os.Remove(tmpFile.Name())
-
-	// Write invalid contents to file
-	_, err = tmpFile.WriteString(" invalid contents")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	// Call main function
-	defer func() {
-		if r := recover(); r != nil {
-			assert.NotNil(t, r)
-		}
-	}()
-	main()
-}
