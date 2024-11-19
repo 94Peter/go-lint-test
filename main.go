@@ -26,7 +26,7 @@ func main() {
 		fmt.Println("Build Time: " + BuildTime)
 		return
 	}
-
+	_ = isDev
 	path, err := os.Getwd()
 	if err != nil {
 		panic(err)
