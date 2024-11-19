@@ -70,3 +70,10 @@ func Test_MainEnvFileExists(t *testing.T) {
 	// Check that .env file is loaded
 	assert.Equal(t, "value", os.Getenv("TEST_ENV_VAR"))
 }
+
+func Test_handlerErr(t *testing.T) {
+	assert.Panics(t, func() {
+		err := fmt.Errorf("test error")
+		handler(err)
+	}, "test error")
+}

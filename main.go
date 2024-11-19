@@ -26,13 +26,18 @@ func main() {
 	}
 	_ = isDev
 	path, err := os.Getwd()
-	if err != nil {
-		panic(err)
-	}
+	handler(err)
 	envFile := path + "/.env"
 	if util.FileExists(envFile) {
-		godotenv.Load(envFile)
+		err = godotenv.Load(envFile)
+		handler(err)
 	}
 
 	fmt.Println("just test")
+}
+
+func handler(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
