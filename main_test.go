@@ -14,9 +14,11 @@ func Test_MainVersionFlag(t *testing.T) {
 	// Set version flag
 	flagSet := flag.NewFlagSet("test", flag.ExitOnError)
 	flagSet.BoolVar(v, "v", true, "version")
-	flagSet.Parse([]string{"-v"})
+	err := flagSet.Parse([]string{"-v"})
+	assert.Nil(t, err)
 	defer func() {
-		flagSet.Parse([]string{"-v=false"})
+		err = flagSet.Parse([]string{"-v=false"})
+		assert.Nil(t, err)
 		assert.False(t, *v)
 	}()
 	// Capture output
@@ -41,7 +43,8 @@ func Test_MainDevFlag(t *testing.T) {
 	// Set dev flag
 	flagSet := flag.NewFlagSet("test", flag.ExitOnError)
 	flagSet.BoolVar(isDev, "dev", false, "dev mode")
-	flagSet.Parse([]string{"-dev"})
+	err := flagSet.Parse([]string{"-dev"})
+	assert.Nil(t, err)
 	// Call main function
 	main()
 
@@ -60,7 +63,8 @@ func Test_MainEnvFileExists(t *testing.T) {
 	}
 	defer os.Remove(envFilePath)
 
-	tmpFile.Write([]byte("TEST_ENV_VAR=value"))
+	_, err = tmpFile.Write([]byte("TEST_ENV_VAR=value"))
+	assert.Nil(t, err)
 	fmt.Println(tmpFile.Name())
 	// Set environment variable
 
